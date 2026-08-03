@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Golden Smile | Luxury Digital Dental Lab</title>
+    <meta
+      name="description"
+      content="A digital dental lab specialized in Zirconia, E.max, and long-span bridges, engineered with full CAD/CAM manufacturing precision."
+    />
+
+    <!-- Open Graph: better previews when sharing on WhatsApp/Facebook -->
+    <meta
+      property="og:title"
+      content="Golden Smile | Luxury Digital Dental Lab"
+    />
+    <meta
+      property="og:description"
+      content="An integrated digital workflow that guarantees a perfect fit in every case."
+    />
+    <meta property="og:image" content="../images/hero.jpg" />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="../images/logo.png" type="image/png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&family=Tajawal:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      /* ── English-page overrides ──────────────────────────────────── */
+
+      /* Flip the nav: logo on the right, links on the left */
+      .navbar {
+        direction: rtl;
+      }
+      .nav-links {
+        direction: ltr;
+      }
+
+      /* Contact pill spacing in mirrored layout */
+      .nav-links a.nav-contact {
+        margin-right: 0;
+        margin-left: 8px;
+      }
+
+      /* Mirror the hero image for LTR layout */
+      .hero {
+        background-image: url("../images/hero-en.jpg");
+        background-position: right center;
+      }
+
+      .hero::before {
+        background: linear-gradient(
+          to right,
+          var(--paper) 0%,
+          rgba(251, 250, 247, 0.6) 42%,
+          rgba(251, 250, 247, 0) 100%
+        );
+      }
+
+      .hero-content {
+        text-align: left;
+      }
+      .hero p {
+        text-align: left;
+      }
+
+      /* ===== MOBILE STYLES — English (LTR) overrides =====
+   These rules live inside media queries only.
+   They override shared mobile styles that are direction-aware.
+   ======================================================= */
+      @media (max-width: 768px) {
+        /* LTR hero: shift crop to left-center subject area */
+        .hero {
+          background-image: url("../images/hero-en-mobile.jpg");
+          background-position: center;
+        }
+
+        /* LTR desktop gradient was right→left; mobile stays same */
+        .hero::before {
+          background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(251, 250, 247, 0.6) 40%,
+            rgba(251, 250, 247) 100%
+          ) !important;
+        }
+
+        /* Keep LTR text left-aligned on mobile (shared style centers it) */
+        .hero-content {
+          text-align: left;
+        }
+        .hero p {
+          text-align: left;
+        }
+
+        /* LTR nav: contact pill margin fix in mobile menu */
+        .nav-links a.nav-contact {
+          margin-left: 20px;
+          margin-right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ═══ Brand identity band — appears once at the top, non-sticky ═══ -->
+    <div class="brand-band">
+      <div class="brand-band__lines" aria-hidden="true">
+        <svg viewBox="0 0 800 220" preserveAspectRatio="xMidYMid meet">
+          <polyline points="0,10 260,10 320,70 320,220" />
+          <polyline points="800,10 540,10 480,70 480,220" />
+          <polyline points="0,60 190,60 235,105" />
+          <polyline points="800,60 610,60 565,105" />
+          <circle cx="320" cy="70" r="4"></circle>
+          <circle cx="480" cy="70" r="4"></circle>
+          <circle cx="235" cy="105" r="3"></circle>
+          <circle cx="565" cy="105" r="3"></circle>
+        </svg>
+      </div>
+      <img
+        src="../images/logo.png"
+        alt="Golden Smile — Digital Dental Lab"
+        class="brand-band__logo"
+      />
+      <p class="brand-band__tag">A Leader in Dental Prosthesis</p>
+    </div>
+
+    <!-- ═══ Sticky navbar ═══ -->
+    <nav class="navbar">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input" />
+      <a href="#" class="logo-container" aria-label="Back to top">
+        <img src="../images/logo.png" alt="Golden Smile" class="main-logo" />
+      </a>
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <div class="nav-links">
+        <a href="../index.html" class="lang-switch">AR</a>
+        <a href="#about">About Us</a>
+        <a href="#brochure">Digital Catalog</a>
+        <a href="#gallery">Case Gallery</a>
+        <a href="#contact" class="nav-contact">Contact Us</a>
+      </div>
+    </nav>
+
+    <!-- ═══ Hero section ═══ -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Crafting Smiles.<br />Elevating Dentistry.</h1>
+        <p>
+          Your precision deserves a partner who masters every hidden detail and
+          guarantees a flawless fit.
+        </p>
+        <div class="hero-buttons">
+          <a
+            href="https://wa.me/201099060942"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener"
+            >Chat on WhatsApp</a
+          >
+          <a href="#gallery" class="btn-secondary">View Our Work</a>
+        </div>
+      </div>
+      <a href="#about" class="scroll-cue" aria-label="Scroll down"
+        ><span></span
+      ></a>
+    </section>
+
+    <!-- ═══ About — Digital Workflow ═══ -->
+    <section id="about" class="about-section">
+      <div class="section-header">
+        <span class="eyebrow">OUR WORKFLOW</span>
+        <h2>Why Golden Smile?</h2>
+        <p>
+          An integrated digital workflow that guarantees a perfect fit in every
+          case
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Seamless Digital Integration</h3>
+          <p>
+            We transform your intraoral scans into biologically accurate designs
+            instantly, guaranteeing a 'first-time fit' that minimizes chair time
+            and eliminates costly remakes and traditional impression errors.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>Digital Manufacturing Precision</h3>
+          <p>
+            Utilizing state-of-the-art 5-Axis milling technology, we deliver
+            Zirconia restorations with flawless marginal integrity (zero
+            micro-leakage) and precise anatomy, requiring absolutely no manual
+            adjustments upon seating.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>Biomimetic Smile Design</h3>
+          <p>
+            We blend artistry with technology to create lifelike smiles. We
+            design veneers and anterior restorations that mimic the translucency
+            of natural teeth, delivering stunning results that elevate your
+            clinic's reputation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Digital Catalog ═══ -->
+    <section id="brochure" class="brochure-section">
+      <div class="brochure-inner">
+        <div class="brochure-text">
+          <span class="eyebrow">DIGITAL CATALOG</span>
+          <h2>Discover Our Services</h2>
+          <p>
+            In your hands is the digital edition of our exceptional services.
+            Your comprehensive guide to selecting the finest materials and
+            digital manufacturing technologies, exclusively tailored to meet the
+            expectations of your most discerning patients. Begin your journey of
+            refinement with us.
+          </p>
+          <a href="../pdf/catalog.pdf" class="btn-primary" download
+            >Download Catalog (PDF)</a
+          >
+        </div>
+        <div class="brochure-preview">
+          <img
+            src="../images/catalog-preview.jpg"
+            alt="Golden Smile Digital Catalog Cover"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Case Gallery ═══ -->
+    <section id="gallery" class="gallery-section">
+      <div class="section-header">
+        <span class="eyebrow">PORTFOLIO</span>
+        <h2>Case Gallery</h2>
+        <p>
+          Masterpieces that embody the highest standards of precision and
+          natural aesthetics
+        </p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <img
+            src="../images/case1.jpg"
+            alt="Ultra-precise zirconia case"
+            class="gallery-img"
+          />
+        </figure>
+        <figure class="gallery-item">
+          <img src="../images/case2.jpg" alt="E.max case" class="gallery-img" />
+        </figure>
+        <figure class="gallery-item">
+          <img
+            src="../images/case3.jpg"
+            alt="Porcelain-fused-to-metal (PFM) case"
+            class="gallery-img"
+          />
+        </figure>
+        <figure class="gallery-item">
+          <img
+            src="../images/case4.jpg"
+            alt="Precision cosmetic veneer case"
+            class="gallery-img"
+          />
+        </figure>
+        <figure class="gallery-item">
+          <img
+            src="../images/case5.jpg"
+            alt="Precision cosmetic veneer case"
+            class="gallery-img"
+          />
+        </figure>
+        <figure class="gallery-item">
+          <img
+            src="../images/case6.jpg"
+            alt="Precision cosmetic veneer case"
+            class="gallery-img"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ═══ Footer / Contact ═══ -->
+    <footer id="contact" class="footer">
+      <div class="footer-content">
+        <span class="eyebrow">GET STARTED</span>
+        <h2>Ready to Receive Your Cases</h2>
+        <p>
+          To start your first case with us, or for a technical question, our
+          team is ready to help.
+        </p>
+        <div class="contact-links">
+          <a
+            href="https://wa.me/201099060942"
+            class="btn-primary"
+            target="_blank"
+            rel="noopener"
+            >Chat on WhatsApp</a
+          >
+          <a href="tel:+201140545014" class="btn-secondary">Direct Call</a>
+        </div>
+
+        <!-- Social links — please update hrefs when social accounts are available -->
+        <div class="social-links">
+          <a
+            href="https://www.facebook.com/Golden.smilelab/"
+            class="social-icon"
+            aria-label="Facebook"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 8.5h2V5.5h-2c-1.93 0-3.5 1.57-3.5 3.5v2H9.5v3H11.5V19H14.5V14H16.8L17.3 11H14.5V9.5C14.5 8.95 14.95 8.5 15 8.5Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.instagram.com/golden.smilelab"
+            class="social-icon"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="3.5"
+                y="3.5"
+                width="17"
+                height="17"
+                rx="5"
+                stroke="currentColor"
+                stroke-width="1.6"
+              />
+              <circle
+                cx="12"
+                cy="12"
+                r="4"
+                stroke="currentColor"
+                stroke-width="1.6"
+              />
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
+            </svg>
+          </a>
+          <a
+            href="https://www.tiktok.com/@golden.smile.dlab"
+            class="social-icon"
+            aria-label="TikTok"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14 3v10.2a2.6 2.6 0 1 1-2.2-2.57M14 3c.3 2.2 1.9 3.8 4 4v2.2c-1.5 0-2.9-.5-4-1.35"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <p class="footer-copy">© 2026 Golden Smile Dental Lab</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<!--
+
+-->

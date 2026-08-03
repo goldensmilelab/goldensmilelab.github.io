@@ -1,0 +1,1191 @@
+/* ============================================================
+   Golden Smile — Digital Dental Lab
+   Pure HTML/CSS. No JavaScript. Built for GitHub Pages.
+   ============================================================ */
+
+:root {
+  /* ألوان الهوية */
+  --gold: #d4af37;
+  --gold-bright: #e9c767;
+  --gold-deep: #9c7d22;
+  --ink: #0b0b0c;
+  --paper: #fbfaf7;
+  --paper-alt: #f3eedf;
+  --graphite: #4a4a4a;
+  --hairline: #e7e1d2;
+
+  /* الخطوط */
+  --font-display: "Cairo", "Segoe UI", sans-serif;
+  --font-body: "Tajawal", "Segoe UI", sans-serif;
+
+  --nav-h: 78px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+a:focus-visible,
+button:focus-visible,
+label:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* أقسام الصفحة الواحدة — تعويض ارتفاع الشريط اللاصق عند القفز بالروابط */
+#about,
+#brochure,
+#gallery,
+#contact {
+  scroll-margin-top: calc(var(--nav-h) + 14px);
+}
+
+/* ============================================================
+   شريط الهوية الكبير (يظهر مرة واحدة، غير لاصق)
+   ============================================================ */
+.brand-band {
+  position: relative;
+  background: radial-gradient(
+    120% 150% at 50% 0%,
+    #ffffff 0%,
+    var(--paper) 55%,
+    #ffffff 100%
+  );
+  padding: 64px 20px 46px;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.brand-band__lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.brand-band__lines svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.brand-band__lines polyline {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1;
+  opacity: 0.32;
+}
+
+.brand-band__lines circle {
+  fill: var(--gold);
+  opacity: 0.55;
+}
+
+.brand-band__logo {
+  position: relative;
+  z-index: 2;
+  height: 128px;
+  width: auto;
+  filter: drop-shadow(0 0 22px rgba(212, 175, 55, 0.35));
+  animation: glow-pulse 5s ease-in-out infinite;
+}
+
+.brand-band__tag {
+  position: relative;
+  z-index: 2;
+  margin: 16px 0 0;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 32px rgba(212, 175, 55, 0.55));
+  }
+}
+
+/* ============================================================
+   الشريط اللاصق المُصغّر — يلتصق أعلى الشاشة بمجرد تجاوز شريط الهوية
+   (هذا هو ما يحقق "كبير بالبداية ثم صغير عند السكرول" بدون جافاسكريبت)
+   ============================================================ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  direction: ltr; /* الأيقونة دائماً يسار، الروابط دائماً يمين */
+  padding: 0 40px;
+  min-height: var(--nav-h);
+  background: rgba(251, 250, 247, 0.9);
+  backdrop-filter: blur(10px) saturate(1.3);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.main-logo {
+  height: 42px;
+  width: auto;
+  display: block;
+  transition: height 0.25s ease;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  direction: rtl;
+}
+
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 27px 15px;
+  transition: color 0.25s ease;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 21px;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--gold-deep);
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* زر "تواصل معنا" يبرز كحبّة CTA صغيرة داخل الشريط */
+.nav-links a.nav-contact {
+  margin-right: 8px;
+  padding: 10px 20px !important;
+  background: var(--ink);
+  color: var(--paper) !important;
+  border-radius: 999px;
+  font-size: 0.88rem;
+}
+
+.nav-links a.nav-contact::after {
+  display: none;
+}
+
+.nav-links a.nav-contact:hover,
+.nav-links a.nav-contact:focus-visible {
+  background: var(--gold);
+  color: var(--ink) !important;
+}
+
+/* ── قائمة الهامبرغر (CSS فقط، بدون جافاسكريبت) ───────────── */
+.nav-toggle-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px 4px;
+}
+
+.nav-toggle-label span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ============================================================
+   الأزرار
+   ============================================================ */
+.btn-primary {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  color: #1a1408;
+  padding: 15px 32px;
+  text-decoration: none;
+  border-radius: 3px;
+  box-shadow: 0 10px 24px rgba(212, 175, 55, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(212, 175, 55, 0.4);
+}
+
+.btn-secondary {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  background-color: transparent;
+  color: var(--gold);
+  padding: 13.5px 30px;
+  text-decoration: none;
+  border: 1.5px solid var(--gold);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--gold);
+  color: #1a1408;
+}
+
+/* ============================================================
+   الواجهة الرئيسية (Hero)
+   ============================================================ */
+.hero {
+  background-image: url("images/hero.jpg");
+  background-size: cover;
+  background-position: left center;
+  background-repeat: no-repeat;
+  min-height: 82vh;
+  display: flex;
+  align-items: center;
+  padding: 70px 6vw;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    var(--paper) 0%,
+    rgba(251, 250, 247, 0.6) 42%,
+    rgba(251, 250, 247, 0) 100%
+  );
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    background-image: url("images/hero-mobile.jpg");
+    padding: 30px 10px;
+  }
+
+  .hero::before {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(251, 250, 247, 0.6) 40%,
+      rgba(251, 250, 247) 100%
+    ) !important;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  text-align: right;
+  animation: fade-up 0.8s ease both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero h1 {
+  font-weight: 900;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--graphite);
+  line-height: 1.7;
+  margin-bottom: 34px;
+  max-width: 92%;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: block;
+  padding: 10px;
+}
+
+.scroll-cue span {
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+  transform: rotate(45deg);
+  animation: bounce 2.2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    margin-top: 0;
+  }
+  50% {
+    margin-top: 8px;
+  }
+}
+
+/* ============================================================
+   قسم النبذة — بطاقات المخطط الرقمي
+   ============================================================ */
+.about-section {
+  padding: 100px 20px;
+  background-color: var(--paper);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  color: var(--graphite);
+  font-size: 1.05rem;
+}
+
+.features-grid {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid var(--hairline);
+  padding: 46px 30px 34px;
+  width: 30%;
+  min-width: 270px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 20px;
+  height: 20px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  opacity: 0.9;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.07);
+  border-color: var(--gold);
+}
+
+.feature-card h3 {
+  font-weight: 700;
+  font-size: 1.18rem;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: var(--graphite);
+  line-height: 1.75;
+  font-size: 0.96rem;
+  margin: 0;
+}
+
+/* ============================================================
+   قسم الكتيب الرقمي
+   ============================================================ */
+.brochure-section {
+  background: linear-gradient(160deg, var(--paper-alt), #ead9a8);
+  padding: 100px 20px;
+}
+
+.brochure-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.brochure-text {
+  flex: 1 1 380px;
+  text-align: right;
+}
+
+.brochure-text h2 {
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.brochure-text p {
+  color: var(--graphite);
+  line-height: 1.75;
+  margin-bottom: 30px;
+  max-width: 480px;
+}
+
+.brochure-preview {
+  flex: 0 0 auto;
+}
+
+.brochure-preview img {
+  width: 270px;
+  max-width: 68vw;
+  display: block;
+  border-radius: 6px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(212, 175, 55, 0.4);
+  transform: rotate(-4deg);
+  transition: transform 0.4s ease;
+}
+
+.brochure-preview img:hover {
+  transform: rotate(0deg) scale(1.04);
+}
+
+/* ============================================================
+   معرض الحالات
+   ============================================================ */
+.gallery-section {
+  padding: 100px 20px;
+  background-color: var(--paper);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  margin: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+  background-color: var(--paper-alt);
+}
+
+.gallery-img {
+  width: 100%;
+  height: 360px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  padding: 12px;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.05);
+}
+
+.gallery-item--empty {
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1.5px dashed #d9cfaf;
+  background-color: var(--paper-alt);
+  color: #a99c74;
+  box-shadow: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.gallery-item__plus {
+  font-size: 2.2rem;
+  line-height: 1;
+  color: #c9bc8e;
+}
+
+/* ============================================================
+   الفوتر
+   ============================================================ */
+.footer {
+  background-color: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: 90px 20px 40px;
+}
+
+.footer .eyebrow {
+  color: var(--gold-bright);
+}
+
+.footer h2 {
+  font-weight: 800;
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 14px;
+}
+
+.footer p {
+  color: #c9c6c0;
+  max-width: 520px;
+  margin: 0 auto 34px;
+  line-height: 1.7;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-deep);
+  color: var(--gold-bright);
+  transition: background-color 0.25s ease, color 0.25s ease,
+    transform 0.25s ease;
+  text-decoration: none;
+}
+
+.social-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-icon:hover,
+.social-icon:focus-visible {
+  background-color: var(--gold);
+  color: var(--ink);
+  transform: translateY(-3px);
+}
+
+.footer-copy {
+  margin: 40px 0 0;
+  font-size: 0.8rem;
+  color: #6f6b63;
+}
+
+/* زر تبديل اللغة في شريط التنقل */
+.nav-links a.lang-switch {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--gold-deep);
+  border: 1.5px solid var(--gold-deep);
+  border-radius: 999px;
+  padding: 6px 14px !important;
+  margin: 0 6px;
+}
+.nav-links a.lang-switch::after {
+  display: none;
+}
+.nav-links a.lang-switch:hover {
+  background: var(--gold-deep);
+  color: #fff;
+}
+
+/* ============================================================
+   الاستجابة للشاشات الصغيرة — RESPONSIVE (≤ 900px)
+   ============================================================ */
+@media (max-width: 900px) {
+  .feature-card {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   ===== MOBILE STYLES =====
+   Breakpoint: tablet / large phone (≤ 768px)
+   Strategy: desktop-first (max-width). All rules below are
+   confined to this media query — zero changes to base styles.
+   Spacing scale: multiples of 8px (8, 16, 24, 32, 40, 48, 56, 64).
+   ============================================================ */
+@media (max-width: 768px) {
+  /* ----- Design token overrides ----- */
+  :root {
+    --nav-h: 60px; /* reduced from 78px for tighter mobile bar */
+  }
+
+  /* ─────────────────────────────────────────────
+       SECTION: Brand Band
+    ───────────────────────────────────────────── */
+  .brand-band {
+    padding: 32px 20px 24px; /* tighter vertical rhythm on mobile */
+  }
+
+  .brand-band__logo {
+    height: 80px; /* readable but not oversized */
+  }
+
+  .brand-band__tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    margin-top: 12px;
+  }
+
+  /* ─────────────────────────────────────────────
+       SECTION: Navigation / Hamburger
+    ───────────────────────────────────────────── */
+  .navbar {
+    padding: 0 20px;
+    min-height: var(--nav-h);
+    /* Use flex so logo + hamburger sit on same row */
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .main-logo {
+    height: 36px; /* legible, not shrunk to illegibility */
+  }
+
+  /* Show hamburger icon on mobile */
+  .nav-toggle-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 44×44px minimum tap target */
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .nav-toggle-label span {
+    width: 22px;
+    height: 2px;
+  }
+
+  /* Collapsed nav: hidden until hamburger is checked */
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 0 20px;
+    border-top: 1px solid var(--hairline);
+    gap: 0;
+  }
+
+  .nav-links a {
+    margin: 0;
+    padding: 12px 20px; /* ≥44px effective tap target with font height */
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .nav-links a.nav-contact {
+    margin: 8px 20px 4px;
+    width: auto;
+    display: inline-block;
+    padding: 10px 22px !important;
+  }
+
+  .nav-links a.lang-switch {
+    margin: 8px 20px 0;
+    padding: 8px 14px !important;
+  }
+
+  /* Open-state: reveal nav links */
+  .nav-toggle-input:checked ~ .nav-links {
+    display: flex;
+  }
+
+  /* Animate hamburger → X */
+  .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ─────────────────────────────────────────────
+       SECTION: Hero
+    ───────────────────────────────────────────── */
+  .hero {
+    min-height: 88vh; /* full-screen feel on mobile */
+    padding: 48px 24px 56px;
+    /* Shift background crop: show mid/upper portion of image */
+    background-position: 60% 20%;
+    display: flex;
+    align-items: flex-end; /* push content toward bottom of hero */
+  }
+
+  /* Stronger overlay on mobile so text stays legible over image */
+  .hero::before {
+    background: linear-gradient(
+      to top,
+      var(--paper) 35%,
+      rgba(251, 250, 247, 0.82) 58%,
+      rgba(251, 250, 247, 0.18) 80%,
+      rgba(251, 250, 247, 0) 100%
+    );
+  }
+
+  .hero-content {
+    max-width: 100%;
+    text-align: center; /* center content on mobile */
+  }
+
+  /* Hero headline: clamp for clean wrap across 320–768px */
+  .hero h1 {
+    font-size: clamp(1.85rem, 7.5vw, 2.6rem);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    max-width: 100%;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+
+  /* Hero buttons: full-width, stacked, ≥48px tap target */
+  .hero-buttons {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 16px 24px; /* ≥48px height */
+    font-size: 1rem;
+  }
+
+  /* Scroll cue: keep centered */
+  .scroll-cue {
+    bottom: 20px;
+  }
+
+  /* ─────────────────────────────────────────────
+       SECTION: Buttons (general — footer CTA, brochure)
+    ───────────────────────────────────────────── */
+  .contact-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-links .btn-primary,
+  .contact-links .btn-secondary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 16px 24px;
+    font-size: 1rem;
+  }
+
+  .brochure-text .btn-primary {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 16px 24px;
+    font-size: 1rem;
+  }
+
+  /* ─────────────────────────────────────────────
+       SECTION: About / Feature Cards
+    ───────────────────────────────────────────── */
+  .about-section {
+    padding: 56px 20px 48px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .section-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .section-header p {
+    font-size: 0.97rem;
+  }
+
+  .features-grid {
+    gap: 16px;
+  }
+
+  .feature-card {
+    width: 100%;
+    padding: 32px 24px 28px;
+  }
+
+  /* ─────────────────────────────────────────────
+       SECTION: Brochure / Digital Catalog
+    ───────────────────────────────────────────── */
+  .brochure-section {
+    padding: 56px 20px 48px;
+  }
+
+  .brochure-inner {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .brochure-text {
+    text-align: center;
+  }
+
+  .brochure-text h2 {
+    font-size: 1.6rem;
+  }
+
+  .brochure-text p {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.97rem;
+  }
+
+  .brochure-preview img {
+    width: min(240px, 68vw);
+    transform: rotate(-2deg); /* subtler tilt on small screens */
+  }
+
+  /* ─────────────────────────────────────────────
+       SECTION: Gallery
+    ───────────────────────────────────────────── */
+  .gallery-section {
+    padding: 56px 20px 48px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr; /* 2-column grid on tablet */
+    gap: 14px;
+  }
+
+  .gallery-img,
+  .gallery-item--empty {
+    height: 260px;
+  }
+
+  /* ─────────────────────────────────────────────
+       SECTION: Footer / Contact
+    ───────────────────────────────────────────── */
+  .footer {
+    padding: 56px 20px 32px;
+  }
+
+  .footer h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+
+  .footer p {
+    font-size: 0.97rem;
+    margin-bottom: 28px;
+  }
+
+  .social-links {
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .footer-copy {
+    margin-top: 32px;
+  }
+} /* end @media (max-width: 768px) */
+
+/* ============================================================
+   ===== MOBILE STYLES — Small Phone Refinements =====
+   Breakpoint: small phone (≤ 480px)
+   Tighter spacing, larger relative text, single-column gallery.
+   ============================================================ */
+@media (max-width: 480px) {
+  /* ----- Brand Band ----- */
+  .brand-band {
+    padding: 24px 16px 20px;
+  }
+
+  .brand-band__logo {
+    height: 68px;
+  }
+
+  .brand-band__tag {
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ----- Navigation ----- */
+  .navbar {
+    padding: 0 16px;
+  }
+
+  .main-logo {
+    height: 32px;
+  }
+
+  /* ----- Hero ----- */
+  .hero {
+    padding: 40px 16px 48px;
+    min-height: 90vh;
+    /* Tighten crop for portrait phones: focus on upper-center subject */
+    background-position: 65% 18%;
+  }
+
+  .hero h1 {
+    /* Ensure no orphaned single words below ~340px */
+    font-size: clamp(1.65rem, 8.5vw, 2.2rem);
+    line-height: 1.22;
+    margin-bottom: 14px;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary {
+    padding: 15px 20px;
+    font-size: 0.95rem;
+  }
+
+  /* ----- About / Feature Cards ----- */
+  .about-section {
+    padding: 48px 16px 40px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-header h2 {
+    font-size: 1.45rem;
+  }
+
+  .feature-card {
+    padding: 28px 20px 24px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .feature-card p {
+    font-size: 0.92rem;
+  }
+
+  /* ----- Brochure ----- */
+  .brochure-section {
+    padding: 48px 16px 40px;
+  }
+
+  .brochure-text h2 {
+    font-size: 1.45rem;
+  }
+
+  .brochure-text p {
+    font-size: 0.92rem;
+  }
+
+  .brochure-preview img {
+    width: min(200px, 72vw);
+    transform: rotate(-1.5deg);
+  }
+
+  .brochure-text .btn-primary {
+    max-width: 100%;
+    padding: 15px 20px;
+    font-size: 0.95rem;
+  }
+
+  /* ----- Gallery: single-column on small phones ----- */
+  .gallery-section {
+    padding: 48px 16px 40px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr; /* single column below 480px */
+    gap: 12px;
+  }
+
+  .gallery-img,
+  .gallery-item--empty {
+    height: 300px; /* taller when full-width */
+  }
+
+  /* ----- Footer / Contact ----- */
+  .footer {
+    padding: 48px 16px 28px;
+  }
+
+  .footer h2 {
+    font-size: 1.45rem;
+  }
+
+  .footer p {
+    font-size: 0.92rem;
+    margin-bottom: 24px;
+  }
+
+  .contact-links .btn-primary,
+  .contact-links .btn-secondary {
+    padding: 15px 20px;
+    font-size: 0.95rem;
+  }
+
+  .social-icon {
+    width: 44px;
+    height: 44px; /* ≥44px tap target */
+  }
+} /* end @media (max-width: 480px) */
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .brand-band__logo,
+  .scroll-cue span,
+  .hero-content {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.001ms !important;
+  }
+}
